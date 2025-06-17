@@ -1,14 +1,17 @@
 package db.sga.backend.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import java.io.Serializable;
 
 @Entity
+@Data
 @Table(name = "course", schema = "academic")
-public class Course {
+public class Course implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "course_id")
-    private int courseID;
+    private Long courseID;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -19,19 +22,10 @@ public class Course {
     @Column(name = "type",nullable = false)
     private String type;
 
-    public Course(){
-    }
-
-    public Course(String name, int credits, String type) {
-        this.name = name;
-        this.credits = credits;
-        this.type = type;
-    }
-
-    public int getCourseID() {
+    public Long getCourseID() {
         return courseID;
     }
-    public void setCourseID(int courseID) {
+    public void setCourseID(Long courseID) {
         this.courseID = courseID;
     }
     public String getName() {

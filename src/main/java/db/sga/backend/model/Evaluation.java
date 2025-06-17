@@ -1,42 +1,42 @@
 package db.sga.backend.model;
-import db.sga.backend.model.Course;
-import jakarta.persistence.*;
 
+import jakarta.persistence.*;
+import lombok.Data;
+import java.io.Serializable;
 import java.time.LocalDate;
 
-
+/**
+ * Entity representing an evaluation.
+ */
 @Entity
-@Table (name = "evaluation", schema = "academic")
-public class Evaluation {
+@Data
+@Table(name = "evaluation", schema = "academic")
+public class Evaluation implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "evaluation_id")
-    private int evaluationID;
+    private Long evaluationID;
 
-    @Column(name = "type",nullable = false)
+    @Column(name = "type", nullable = false)
     private String type;
 
-    @Column(name ="date",nullable = false)
+    @Column(name = "date", nullable = false)
     private LocalDate date;
 
     @ManyToOne
-    @JoinColumn(name = "course_id",nullable = false)
+    @JoinColumn(name = "course_id", nullable = false)
     private Course course;
 
-    public Evaluation(){
+    public Course getCourse() {
+        return this.course;
     }
 
-    public Evaluation(String type, LocalDate date, Course course) {
-        this.type = type;
-        this.date = date;
-        this.course = course;
-    }
-
-    public int getEvaluationID() {
+    public Long getEvaluationID() {
         return evaluationID;
     }
 
-    public void setEvaluationID(int evaluationID) {
+    public void setEvaluationID(Long evaluationID) {
         this.evaluationID = evaluationID;
     }
 
@@ -54,14 +54,6 @@ public class Evaluation {
 
     public void setDate(LocalDate date) {
         this.date = date;
-    }
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public int getCourseId(){
-        return this.course.getCourseID();
     }
 
     public void setCourse(Course course) {
