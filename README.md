@@ -41,38 +41,74 @@ src/
     └── resources/
         └── application.properties
 ```
----
-
-## 🌐 Project Links
-
-| Module     | Repository / Deployment Link                            |
-|------------|----------------------------------------------------------|
-| DataBase   | [SGA DataBase GitHub Repo](https://github.com/JsLealM/academic-management-system.git) |
-| Frontend   | [SGA Frontend GitHub Repo](https://github.com/JsLealM/frontend-bdi-sga.git) |
 
 ---
 
+## ⚙️ Configuration
 
-## 🛠️ Setup & Run
+To connect the application to your **PostgreSQL database** (local or cloud-hosted), update the following lines in:
 
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/your-org/sga-backend.git
-cd sga-backend
+```
+src/main/resources/application.properties
 ```
 
-### 2. Configure database connection
-Edit the application.properties file:
+Example configuration for AWS or local:
+
+```properties
+# For AWS RDS
+spring.datasource.url=jdbc:postgresql://your-aws-endpoint.amazonaws.com:5432/academic_management_database
+spring.datasource.username=your_aws_username
+spring.datasource.password=your_aws_password
 ```
+```properties
+# For Local
 spring.datasource.url=jdbc:postgresql://localhost:5432/sga
 spring.datasource.username=postgres
 spring.datasource.password=your_password
 spring.jpa.hibernate.ddl-auto=validate
 ```
 
-### 3. Run the backend
+---
+
+## 🛠️ Setup & Run
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/JsLealM/backend-bdi-sga.git
+cd backend-bdi-sga
 ```
+
+### 2. Configure database connection
+
+Edit the `application.properties` file as shown above.
+
+### 3. Run the backend
+
+```bash
 ./mvnw spring-boot:run
 ```
 
+---
+
+## 🌐 Project Links
+
+| Module     | Repository / Deployment Link |
+|------------|-------------------------------|
+| DataBase   | [SGA Backend GitHub Repo](https://github.com/JsLealM/academic-management-system.git) |
+| Frontend   | [SGA Frontend GitHub Repo](https://github.com/JsLealM/frontend-bdi-sga.git) |
+
+---
+
+## 🧑‍💻 Team
+
+| Name               | Role             |
+|--------------------|------------------|
+| [@Jefferson Pinzon](https://github.com/S4LPICON) | Product Owner    |
+| [@Johan Leal](https://github.com/JsLealM)        | Scrum Master     |
+| [@Briyith Moreno](https://github.com/Briyith-Moreno) | Development  |
+
+- **Team Name:** Dupl4
+- **Slogan:** *"Se fue uno, y no hicimos INSERT para reemplazarlo."*
+
+---
