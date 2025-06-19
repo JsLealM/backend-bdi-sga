@@ -95,7 +95,7 @@ Edit the `application.properties` file as shown above.
 
 | Module     | Repository / Deployment Link |
 |------------|-------------------------------|
-| DataBase   | [SGA Backend GitHub Repo](https://github.com/JsLealM/academic-management-system.git) |
+| DataBase   | [SGA DataBase GitHub Repo](https://github.com/JsLealM/academic-management-system.git) |
 | Frontend   | [SGA Frontend GitHub Repo](https://github.com/JsLealM/frontend-bdi-sga.git) |
 
 ---
