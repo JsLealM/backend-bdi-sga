@@ -16,8 +16,8 @@ import jakarta.transaction.Transactional;
 public interface StudentRepository extends JpaRepository<Student, Integer> {
 
     /**
-     * Elimina los registros de auditoría de un estudiante específico.
-     * @param studentId ID del estudiante.
+     * Deletes the audit records of a specific student.
+     * @param studentId ID student.
      */
     @Modifying
     @Transactional

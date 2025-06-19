@@ -19,7 +19,13 @@ import db.sga.backend.model.Student;
 import db.sga.backend.service.StudentService;
 
 /**
- * REST Controller for Student entity.
+ * REST Controller for managing Student entities.
+ * <p>
+ * Provides endpoints to:
+ * - Retrieve all students
+ * - Create a new student
+ * - Update an existing student
+ * - Delete a student along with their audit records
  */
 @RestController
 @RequestMapping("/students/")
@@ -29,8 +35,9 @@ public class StudentRest {
     private StudentService studentService;
 
     /**
-     * Get all students.
-     * @return List of students.
+     * Retrieves all registered students.
+     *
+     * @return List of students in the system
      */
     @GetMapping
     public ResponseEntity<List<Student>> getAllStudents() {
@@ -38,60 +45,80 @@ public class StudentRest {
     }
 
     /**
-     * Save a new student.
-     * @param student Student object.
-     * @return Saved student with location header.
+     * Saves a new student to the database.
+     *
+     * @param student the student object to save
+     * @return Response with created student and URI location header, or 400 if invalid
      */
     @PostMapping
     public ResponseEntity<Student> saveStudent(@RequestBody Student student) {
         try {
             Student saved = studentService.save(student);
-            return ResponseEntity.created(new URI("/students/" + saved.getStudentId())).body(saved);
+            return ResponseEntity
+                    .created(new URI("/students/" + saved.getStudentId()))
+                    .body(saved);
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(null);
         }
     }
 
     /**
-     * Update an existing student.
+     * Updates an existing student.
+     *
+     * @param id      the ID of the student to update
+     * @param student updated student data
+     * @return Response with updated student, or appropriate error status
      */
     @PutMapping("update/{id}")
     public ResponseEntity<Student> updateStudent(@PathVariable("id") Integer id, @RequestBody Student student) {
         try {
             if (!studentService.existsById(id)) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+                return ResponseEntity
+                        .status(HttpStatus.NOT_FOUND)
+                        .build();
             }
 
             student.setStudentId(id);
             Student updated = studentService.save(student);
             return ResponseEntity.ok(updated);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .build();
         }
     }
 
     /**
-     * Delete a student and their audit records.
+     * Deletes a student and their associated audit records.
+     *
+     * @param id the ID of the student to delete
+     * @return Success message or error response
      */
     @DeleteMapping("delete/{id}")
     public ResponseEntity<String> deleteStudent(@PathVariable("id") Integer id) {
         try {
             if (!studentService.existsById(id)) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Estudiante no encontrado");
+                return ResponseEntity
+                        .status(HttpStatus.NOT_FOUND)
+                        .body("Student not found.");
             }
 
             boolean deleted = studentService.deleteStudentAndAudits(id);
             if (deleted) {
-                return ResponseEntity.ok("Estudiante y auditorías eliminados correctamente");
+                return ResponseEntity.ok("Student and audit logs successfully deleted.");
             } else {
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                                     .body("No se pudo eliminar el estudiante.");
+                return ResponseEntity
+                        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body("Failed to delete student.");
             }
 
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                                 .body("Error interno: " + e.getMessage());
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Internal server error: " + e.getMessage());
         }
     }
 }

@@ -1,8 +1,5 @@
 package db.sga.backend.service;
 
-import db.sga.backend.model.Professor;
-import db.sga.backend.repository.ProfessorRepository;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +9,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import db.sga.backend.model.Professor;
+import db.sga.backend.repository.ProfessorRepository;
 
 /**
  * Service layer responsible for business logic and data access operations
