@@ -42,6 +42,24 @@ src/
         └── application.properties
 ```
 ---
+## ⚙️ Configuration
+
+To connect the application to your **PostgreSQL database** (local or cloud-hosted), update the following lines in:
+```properties
+src/main/resources/application.properties
+```
+Example configuration for AWS or local:
+```properties
+# For AWS RDS
+# spring.datasource.url=jdbc:postgresql://your-aws-endpoint.amazonaws.com:5432/academic_management_database
+# spring.datasource.username=your_aws_username
+# spring.datasource.password=your_aws_password
+
+# For Local
+# spring.datasource.url=jdbc:postgresql://localhost:5432/academic_management_database
+# spring.datasource.username=your_local_username
+# spring.datasource.password=your_local_password
+```
 
 ## 🌐 Project Links
 
