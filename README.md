@@ -47,7 +47,7 @@ src/
 
 | Module     | Repository / Deployment Link                            |
 |------------|----------------------------------------------------------|
-| DataBase   | [SGA DatBase GitHub Repo](https://github.com/JsLealM/academic-management-system.git) |
+| DataBase   | [SGA DataBase GitHub Repo](https://github.com/JsLealM/academic-management-system.git) |
 | Frontend   | [SGA Frontend GitHub Repo](https://github.com/JsLealM/frontend-bdi-sga.git) |
 
 ---
