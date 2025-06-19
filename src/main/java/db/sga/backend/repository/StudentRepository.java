@@ -21,6 +21,11 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
      */
     @Modifying
     @Transactional
-    @Query(value = "DELETE FROM academic.student_audit WHERE student_id = :studentId", nativeQuery = true)
-    void deleteAuditsByStudentId(@Param("studentId") Integer studentId);
+    @Query(value = "DELETE FROM academic.enrollment WHERE student_id = :studentId", nativeQuery = true)
+    void deleteEnrollmentsByStudentId(@Param("studentId") Integer studentId);
+
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE FROM academic.grade_evaluation WHERE student_id = :studentId", nativeQuery = true)
+    void deleteGradeEvaluationByStudentId(@Param("studentId") Integer studentId);
 }

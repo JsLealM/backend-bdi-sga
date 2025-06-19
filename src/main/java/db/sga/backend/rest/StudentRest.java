@@ -46,9 +46,8 @@ public class StudentRest {
     public ResponseEntity<Student> saveStudent(@RequestBody Student student) {
         try {
             Student saved = studentService.save(student);
-            return ResponseEntity.created(new URI("/students/" + saved.getStudentId())).body(saved);
+            return ResponseEntity.created(URI.create("/students/" + saved.getStudentId())).body(saved);
         } catch (Exception e) {
-            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
@@ -62,7 +61,6 @@ public class StudentRest {
             if (!studentService.existsById(id)) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }
-
             student.setStudentId(id);
             Student updated = studentService.save(student);
             return ResponseEntity.ok(updated);
@@ -72,7 +70,7 @@ public class StudentRest {
     }
 
     /**
-     * Delete a student and their audit records.
+     * Delete a student and their related records.
      */
     @DeleteMapping("delete/{id}")
     public ResponseEntity<String> deleteStudent(@PathVariable("id") Integer id) {
@@ -80,18 +78,17 @@ public class StudentRest {
             if (!studentService.existsById(id)) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Estudiante no encontrado");
             }
-
-            boolean deleted = studentService.deleteStudentAndAudits(id);
+            boolean deleted = studentService.deleteStudent(id);
             if (deleted) {
-                return ResponseEntity.ok("Estudiante y auditorías eliminados correctamente");
+                return ResponseEntity.ok("Estudiante eliminado correctamente");
             } else {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                                     .body("No se pudo eliminar el estudiante.");
+                        .body("No se pudo eliminar el estudiante");
             }
 
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                                 .body("Error interno: " + e.getMessage());
+                    .body("Error interno: " + e.getMessage());
         }
     }
 }
