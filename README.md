@@ -47,20 +47,32 @@ src/
 
 | Module     | Repository / Deployment Link                            |
 |------------|----------------------------------------------------------|
-| DataBase   | [SGA Backend GitHub Repo](https://github.com/JsLealM/academic-management-system.git) |
+| DataBase   | [SGA DatBase GitHub Repo](https://github.com/JsLealM/academic-management-system.git) |
 | Frontend   | [SGA Frontend GitHub Repo](https://github.com/JsLealM/frontend-bdi-sga.git) |
 
 ---
 
-## 🧑‍💻 Team
 
-| Name               | Role             |
-|--------------------|------------------|
-|  [@Jefferson Pinzon](https://github.com/S4LPICON) | Product Owner    |
-|  [@Johan Leal](https://github.com/JsLealM) | Scrum Master     |
-|  [@Briyith Moreno](https://github.com/Briyith-Moreno) | Development      |
+## 🛠️ Setup & Run
 
-- **Team Name:** Dupl4
-- **Slogan:** "Se fue uno, y no hicimos INSERT para reemplazarlo."
+### 1. Clone the repository
 
----
+```bash
+git clone https://github.com/your-org/sga-backend.git
+cd sga-backend
+```
+
+### 2. Configure database connection
+Edit the application.properties file:
+```
+spring.datasource.url=jdbc:postgresql://localhost:5432/sga
+spring.datasource.username=postgres
+spring.datasource.password=your_password
+spring.jpa.hibernate.ddl-auto=validate
+```
+
+### 3. Run the backend
+```
+./mvnw spring-boot:run
+```
+
